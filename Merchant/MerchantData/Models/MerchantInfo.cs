@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace MerchantData.Models
 {
@@ -58,10 +60,24 @@ namespace MerchantData.Models
             set;
         }
 
-        public int[] ServiceType
+        public string ServiceTypeList
         {
             get;
             set;
+        }
+
+        [NotMapped]
+        public int[] ServiceType
+        {
+            get
+            {
+                return Array.ConvertAll(ServiceTypeList.Split(';'), int.Parse);
+            }
+            set
+            {
+                ServiceType = value;
+                ServiceTypeList = String.Join(";", ServiceType.Select(p => p.ToString()).ToArray());
+            }
         }
 
         public  bool FreeDeliveryActive 
@@ -88,10 +104,24 @@ namespace MerchantData.Models
             set;
         }
 
-        public int[] AcceptedTypeOfPayment
+        public string AcceptedTypeOfPaymentList
         {
             get;
             set;
+        }
+
+        [NotMapped]
+        public int[] AcceptedTypeOfPayment
+        {
+            get
+            {
+                return Array.ConvertAll(AcceptedTypeOfPaymentList.Split(';'), int.Parse);
+            }
+            set
+            {
+                AcceptedTypeOfPayment = value;
+                AcceptedTypeOfPaymentList = String.Join(";", AcceptedTypeOfPayment.Select(p => p.ToString()).ToArray());
+            }
         }
 
         public DateTime CreatedDate
@@ -100,7 +130,14 @@ namespace MerchantData.Models
             set;
         }
 
-        public DateTime ModifiedBy
+        public DateTime ModifiedDate
+        {
+            get;
+            set;
+        }
+
+
+        public string ModifiedBy
         {
             get;
             set;

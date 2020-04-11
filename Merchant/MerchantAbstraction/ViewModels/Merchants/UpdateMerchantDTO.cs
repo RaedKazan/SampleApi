@@ -35,20 +35,6 @@ namespace MerchantAbstraction.ViewModels.Merchants
         }
 
         [Required]
-        public UpdateLocationDTO location
-        {
-            get;
-            set;
-        }
-
-        [Required]
-        public int LocationId
-        {
-            get;
-            set;
-        }
-
-        [Required]
         public string Phone
         {
             get;
@@ -106,13 +92,6 @@ namespace MerchantAbstraction.ViewModels.Merchants
 
         [Required]
         public int[] AcceptedTypeOfPayment
-        {
-            get;
-            set;
-        }
-
-        [Required]
-        public DateTime CreatedDate
         {
             get;
             set;

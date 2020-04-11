@@ -30,6 +30,13 @@ namespace MerchantApi
         {
             services.AddControllers();
 
+            services.AddSwaggerGen(c =>
+
+            {
+                c.SwaggerDoc(name: "V1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Merchant API", Version = "V1" });
+            });
+
+
             services.AddDbContext<MerchantApiContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("Default")));
 
@@ -44,6 +51,13 @@ namespace MerchantApi
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint(url: "/swagger/V1/swagger.json", name: "Merchant API V1");
+            });
 
             app.UseHttpsRedirection();
 

@@ -29,12 +29,6 @@ namespace MerchantAbstraction.ViewModels.Merchants
             set;
         }
 
-        public LocationDTO location
-        {
-            get;
-            set;
-        }
-
         public int LocationId
         {
             get;

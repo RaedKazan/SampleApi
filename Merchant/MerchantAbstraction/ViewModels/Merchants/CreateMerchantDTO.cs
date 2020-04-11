@@ -28,13 +28,6 @@ namespace MerchantAbstraction.ViewModels.Merchants
         }
 
         [Required]
-        public CreateLocationDTO location
-        {
-            get;
-            set;
-        }
-
-        [Required]
         public string Phone
         {
             get;
