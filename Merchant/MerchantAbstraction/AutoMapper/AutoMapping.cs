@@ -35,32 +35,9 @@ namespace MerchantAbstraction.AutoMapper
                 .ForMember(dest => dest.ImageTitle, opt => opt.MapFrom(src => src.ImageTitle));
             #endregion
 
-            #region Location
-
-            CreateMap<CreateLocationDTO, Location>()
-                .ForMember(dest => dest.CityId, opt => opt.MapFrom(src => src.CityId))
-                .ForMember(dest => dest.Latitude, opt => opt.MapFrom(src => src.Latitude))
-                .ForMember(dest => dest.Longitude, opt => opt.MapFrom(src => src.Longitude))
-                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
-                .ForMember(dest => dest.BuildingNumber, opt => opt.MapFrom(src => src.BuildingNumber))
-                .ForMember(dest => dest.FloorNumber, opt => opt.MapFrom(src => src.FloorNumber));
-
-            CreateMap<UpdateLocationDTO, Location>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
-                .ForMember(dest => dest.CityId, opt => opt.MapFrom(src => src.CityId))
-                .ForMember(dest => dest.Latitude, opt => opt.MapFrom(src => src.Latitude))
-                .ForMember(dest => dest.Longitude, opt => opt.MapFrom(src => src.Longitude))
-                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
-                .ForMember(dest => dest.BuildingNumber, opt => opt.MapFrom(src => src.BuildingNumber))
-                .ForMember(dest => dest.FloorNumber, opt => opt.MapFrom(src => src.FloorNumber));
-
-            CreateMap<Location, CreateLocationDTO>();
-
-            #endregion
-
             #region Merchant
 
-            CreateMap<CreateMerchantDTO, MerchantInfo>()
+            CreateMap<CreateMerchantDTO, Merchant>()
               .ForMember(dest => dest.ShopName, opt => opt.MapFrom(src => src.ShopName))
               .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.FirstName))
               .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName))
@@ -76,7 +53,7 @@ namespace MerchantAbstraction.AutoMapper
               .ForMember(dest => dest.Deleted, opt => opt.MapFrom(src => false));
 
 
-            CreateMap<UpdateMerchantDTO, MerchantInfo>()
+            CreateMap<UpdateMerchantDTO, Merchant>()
               .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
               .ForMember(dest => dest.ShopName, opt => opt.MapFrom(src => src.ShopName))
               .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.FirstName))
@@ -94,7 +71,7 @@ namespace MerchantAbstraction.AutoMapper
               .ForMember(dest => dest.HasPromoCode, opt => opt.MapFrom(src => src.HasPromoCode))
               .ForMember(dest => dest.ModifiedBy, opt => opt.MapFrom(src => src.ModifiedBy));
 
-            CreateMap<MerchantInfo, MerchantDTO>()
+            CreateMap<Merchant, MerchantDTO>()
               .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
               .ForMember(dest => dest.ShopName, opt => opt.MapFrom(src => src.ShopName))
               .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.FirstName))

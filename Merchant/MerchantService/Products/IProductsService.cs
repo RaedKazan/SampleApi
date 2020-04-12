@@ -1,10 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using MerchantData.Models;
+using System.Threading.Tasks;
 
 namespace MerchantService.Products
 {
-    interface IProductsService
+    public interface IProductsService
     {
+        Task<Product> GetProduct(int id);
+
+        Task<int> PostProduct(Product location);
+
+        Task<bool> PutProduct(int id, Product location);
+
+        Task<bool> DeleteProduct(int id);
     }
 }

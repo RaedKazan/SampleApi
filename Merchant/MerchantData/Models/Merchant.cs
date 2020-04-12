@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace MerchantData.Models
 {
-    public sealed class MerchantInfo
+    public sealed class Merchant
     {
         public int Id
         {
@@ -25,12 +25,6 @@ namespace MerchantData.Models
         }
 
         public string LastName
-        {
-            get;
-            set;
-        }
-
-        public Location location
         {
             get;
             set;

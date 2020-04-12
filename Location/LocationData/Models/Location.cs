@@ -1,33 +1,37 @@
-﻿namespace MerchantData.Models
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace LocationData.Models
 {
     public sealed class Location
     {
-        public int Id 
-        { 
+        public int Id
+        {
             get;
             set;
         }
 
         public string CityId
-        { 
+        {
             get;
             set;
         }
 
-        public double Latitude 
-        { 
-            get; 
-            set; 
-        }
-
-        public double Longitude 
-        { 
+        public double Latitude
+        {
             get;
             set;
         }
 
-        public string Description 
-        { 
+        public double Longitude
+        {
+            get;
+            set;
+        }
+
+        public string Description
+        {
             get;
             set;
         }
