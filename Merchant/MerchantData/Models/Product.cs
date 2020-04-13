@@ -41,7 +41,7 @@ namespace MerchantData.Models
             set;
         }
 
-        public DateTime ModifiedBy
+        public DateTime ModifiedDate
         {
             get;
             set;

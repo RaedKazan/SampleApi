@@ -2,6 +2,7 @@
 using MerchantAbstraction.ViewModels.Images;
 using MerchantAbstraction.ViewModels.Locations;
 using MerchantAbstraction.ViewModels.Merchants;
+using MerchantAbstraction.ViewModels.Products;
 using MerchantData.Models;
 using System;
 using System.Collections.Generic;
@@ -89,6 +90,39 @@ namespace MerchantAbstraction.AutoMapper
               .ForMember(dest => dest.Deleted, opt => opt.MapFrom(src => src.Deleted))
               .ForMember(dest => dest.HasPromoCode, opt => opt.MapFrom(src => src.HasPromoCode))
               .ForMember(dest => dest.ModifiedBy, opt => opt.MapFrom(src => src.ModifiedBy));
+            #endregion
+
+            #region Products
+
+            CreateMap<CreateProductDTO, Product>()
+              .ForMember(dest => dest.Active, opt => opt.MapFrom(src => true))
+              .ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(src => DateTime.UtcNow))
+              .ForMember(dest => dest.Deleted, opt => opt.MapFrom(src => false))
+              .ForMember(dest => dest.HasSale, opt => opt.MapFrom(src => src.HasSale))
+              .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+              .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price))
+              .ForMember(dest => dest.SalePercent, opt => opt.MapFrom(src => src.SalePercent));
+
+            CreateMap<UpdateProductDTO, Product>()
+              .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+              .ForMember(dest => dest.Active, opt => opt.MapFrom(src => src.Active))
+              .ForMember(dest => dest.ModifiedDate, opt => opt.MapFrom(src => DateTime.UtcNow))
+              .ForMember(dest => dest.Deleted, opt => opt.MapFrom(src => src.Deleted))
+              .ForMember(dest => dest.HasSale, opt => opt.MapFrom(src => src.HasSale))
+              .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+              .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price))
+              .ForMember(dest => dest.SalePercent, opt => opt.MapFrom(src => src.SalePercent));
+
+            CreateMap<Product, ProductDTO>()
+              .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+              .ForMember(dest => dest.Active, opt => opt.MapFrom(src => src.Active))
+              .ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(src => src.CreatedDate))
+              .ForMember(dest => dest.ModifiedDate, opt => opt.MapFrom(src => src.ModifiedDate))
+              .ForMember(dest => dest.Deleted, opt => opt.MapFrom(src => src.Deleted))
+              .ForMember(dest => dest.HasSale, opt => opt.MapFrom(src => src.HasSale))
+              .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+              .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price))
+              .ForMember(dest => dest.SalePercent, opt => opt.MapFrom(src => src.SalePercent));
             #endregion
         }
     }
