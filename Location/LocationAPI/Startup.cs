@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using LocationAbstraction.AutoMapper;
 using LocationData.Data;
 using LocationService.Locations;
 using Microsoft.AspNetCore.Builder;
@@ -41,7 +42,9 @@ namespace LocationAPI
             services.AddDbContext<LocationContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("Default")));
 
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(c => c.AddProfile<AutoMapping>(), typeof(Startup));
+
+
 
             services.AddScoped<ILocationsService, LocationsService>();
 

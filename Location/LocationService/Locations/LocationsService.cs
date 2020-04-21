@@ -40,9 +40,9 @@ namespace LocationService.Locations
         public async Task<int> PostLocation(Location location)
         {
             context.Locations.Add(location);
-            var id = await context.SaveChangesAsync();
+            await context.SaveChangesAsync();
 
-            return id;
+            return location.Id;
         }
 
         public async Task<bool> PutLocation(int id, Location location)

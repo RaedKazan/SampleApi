@@ -70,7 +70,7 @@ namespace LocationAPI.Controllers
             var id = await locationsService.PostLocation(mapper.Map<Location>(image));
 
 
-            return CreatedAtAction("GetImage", new { id = id }, id);
+            return CreatedAtAction("PostLocation", new { id = id }, id);
         }
 
         // DELETE: api/location/5
