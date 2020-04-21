@@ -4,12 +4,12 @@ using LocationData.Models;
 
 namespace LocationAbstraction.AutoMapper
 {
-    class AutoMapping : Profile
+    public class AutoMapping : Profile
     {
         public AutoMapping()
         {
 
-            #region Location
+                #region Location
 
             CreateMap<CreateLocationDTO, Location>()
                 .ForMember(dest => dest.CityId, opt => opt.MapFrom(src => src.CityId))
