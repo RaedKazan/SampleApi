@@ -1,15 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using LookUpData.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using AutoMapper;
 
 namespace LookUpApi
 {
@@ -25,6 +21,17 @@ namespace LookUpApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Adding REFERENCE to the DBCONTEXT
+            services.AddDbContextPool<LookUpDbContext>(
+                options => options.UseSqlServer(
+                  Configuration.GetConnectionString("Default")
+                ));
+
+            //Adding REFERENCE TO Automapper
+            //This will scan the assembly in which startup is found. 
+            //and tries to find a profiler class that configures automapper
+            services.AddAutoMapper(typeof(Startup));
+
             services.AddControllers();
         }
 
