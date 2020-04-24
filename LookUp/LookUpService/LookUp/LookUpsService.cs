@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace LookUpService
 {
-    public class LookUpService : ILookUpService
+    public class LookUpsService : ILookUpsService
     {
         private readonly LookUpDbContext lookUpDbContext;
 
-        public LookUpService(LookUpDbContext lookUpDbContext)
+        public LookUpsService(LookUpDbContext lookUpDbContext)
         {
             this.lookUpDbContext = lookUpDbContext;
         }
 
         public async Task<bool> DeleteLookUp(int id)
         {
-            var lookUp = lookUpDbContext
+            var lookUp = await lookUpDbContext
                 .LookUps
                 .FindAsync(id);
 

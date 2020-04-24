@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace LookUpService
 {
-    public class LookUpTypeService : ILookUpTypeService
+    public class LookUpTypesService : ILookUpTypesService
     {
         private readonly LookUpDbContext lookUpDbContext;
 
-        public LookUpTypeService(LookUpDbContext lookUpDbContext)
+        public LookUpTypesService(LookUpDbContext lookUpDbContext)
         {
             this.lookUpDbContext = lookUpDbContext;
         }

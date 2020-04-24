@@ -1,46 +1,110 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using LookUpAbstraction.DTO.CascadingLookUp.Request;
+using LookUpAbstraction.DTO.CascadingLookUp.Response;
+using LookUpData.Models;
+using LookUpService;
 using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using Swashbuckle.Swagger.Annotations;
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace LookUpApi.Controllers
 {
     [Route("api/[controller]")]
     public class CascadingLookUpController : Controller
     {
-        // GET: api/<controller>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly ICascadingLookUpsService cascadingLookUpService;
+        private readonly IMapper mapper;
+
+        public CascadingLookUpController(ICascadingLookUpsService cascadingLookUpService, IMapper mapper)
         {
-            return new string[] { "value1", "value2" };
+            this.cascadingLookUpService = cascadingLookUpService;
+            this.mapper = mapper;
         }
 
-        // GET api/<controller>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        [SwaggerResponse(HttpStatusCode.OK, Type = typeof(List<CascadingLookUpDTO>))]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
+        public async Task<ActionResult> GetCascadingLookUp(int id)
         {
-            return "value";
+            var cascadingLookUp = await cascadingLookUpService.GetCascadingLookUp(id);
+
+            if (cascadingLookUp != null)
+                return Ok(mapper.Map<CascadingLookUpDTO>(cascadingLookUp));
+
+            return NotFound();
+
         }
 
-        // POST api/<controller>
+        [HttpGet("parent/{id}")]
+        [SwaggerResponse(HttpStatusCode.OK, Type = typeof(List<CascadingLookUpDTO>))]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
+        public async Task<ActionResult> GetCascadingLookUpForParentId(int id)
+        {
+            var cascadingLookUp = await cascadingLookUpService.GetCascadingLookUpsForParent(id);
+
+            if (cascadingLookUp != null)
+                return Ok(mapper.Map<List<CascadingLookUpDTO>>(cascadingLookUp));
+
+            return NotFound();
+        }
+
         [HttpPost]
-        public void Post([FromBody]string value)
+        [SwaggerResponse(HttpStatusCode.Created, Type = typeof(string))]
+        [SwaggerResponse(HttpStatusCode.BadRequest)]
+        public async Task<ActionResult> PostCascadingLookUp([FromBody]CreateCascadingLookUpDTO createCascadingLookUpDTO)
         {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var cascadingLookUpId = await cascadingLookUpService.
+                PostCascadingLookUp(mapper.Map<CascadingLookUp>(createCascadingLookUpDTO));
+
+            if (cascadingLookUpId != default)
+                return Created("CascadingLookUp Id :", cascadingLookUpId);
+            else
+                return BadRequest();
         }
 
-        // PUT api/<controller>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        [SwaggerResponse(HttpStatusCode.OK, Type = typeof(int))]
+        [SwaggerResponse(HttpStatusCode.BadRequest)]
+        [SwaggerResponse(HttpStatusCode.BadRequest, Type = typeof(string))]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
+        public async Task<ActionResult> PutCascadingLookUp(int id, [FromBody]UpdateCascadingLookUpDTO UpdateCascadingLookUpDTO)
         {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            try
+            {
+                var success = await cascadingLookUpService.PutCascadingLookUp(id, mapper.Map<CascadingLookUp>(UpdateCascadingLookUpDTO));
+
+                if (success)
+                    return Ok(id);
+                else
+                    return NotFound();
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
-        // DELETE api/<controller>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        [SwaggerResponse(HttpStatusCode.OK, Type = typeof(int))]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
+        public async Task<ActionResult> DeleteCascadingLookUp(int id)
         {
+            var success = await cascadingLookUpService.DeleteCascadingLookUp(id);
+
+            if (success)
+                return Ok(id);
+            else
+                return NotFound();
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LookUpService
 {
-    public interface ILookUpTypeService
+    public interface ILookUpTypesService
     {
 
         Task<LookUpType> GetLookUpType(int id);

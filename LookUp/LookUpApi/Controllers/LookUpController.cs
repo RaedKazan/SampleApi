@@ -4,8 +4,10 @@ using LookUpAbstraction.DTO.LookUp.Response;
 using LookUpData.Models;
 using LookUpService;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.Swagger.Annotations;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -15,16 +17,18 @@ namespace LookUpApi.Controllers
     [Route("api/[controller]")]
     public class LookUpController : Controller
     {
-        private readonly ILookUpService lookUpService;
+        private readonly ILookUpsService lookUpService;
         private readonly IMapper mapper;
 
-        public LookUpController(ILookUpService lookUpService, IMapper mapper)
+        public LookUpController(ILookUpsService lookUpService, IMapper mapper)
         {
             this.lookUpService = lookUpService;
             this.mapper = mapper;
         }
 
         [HttpGet("type/{id}")]
+        [SwaggerResponse(HttpStatusCode.OK, Type = typeof(List<LookUpDTO>))]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
         public async Task<ActionResult> GetLookUpOfType(int id)
         {
             var lookUps = await lookUpService.GetLookUps(id);
@@ -37,6 +41,8 @@ namespace LookUpApi.Controllers
         }
 
         [HttpGet("{id}")]
+        [SwaggerResponse(HttpStatusCode.OK, Type = typeof(LookUpDTO))]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
         public async Task<ActionResult> GetLookUp(int id)
         {
             var lookup = await lookUpService.GetLookUp(id);
@@ -48,6 +54,8 @@ namespace LookUpApi.Controllers
         }
 
         [HttpPost]
+        [SwaggerResponse(HttpStatusCode.Created, Type = typeof(string))]
+        [SwaggerResponse(HttpStatusCode.BadRequest)]
         public async Task<ActionResult> PostLookUp([FromBody]CreateLookUpDTO createLookUpDTO)
         {
             if (!ModelState.IsValid)
@@ -62,7 +70,11 @@ namespace LookUpApi.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> PutLookUp(int id,UpdateLookUpDTO updateLookUpDTO)
+        [SwaggerResponse(HttpStatusCode.OK, Type = typeof(int))]
+        [SwaggerResponse(HttpStatusCode.BadRequest)]
+        [SwaggerResponse(HttpStatusCode.BadRequest, Type = typeof(string))]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
+        public async Task<ActionResult> PutLookUp(int id, [FromBody]UpdateLookUpDTO updateLookUpDTO)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
@@ -72,7 +84,7 @@ namespace LookUpApi.Controllers
                 var success = await lookUpService.PutLookUp(id, mapper.Map<LookUp>(updateLookUpDTO));
 
                 if (success)
-                    return Ok(updateLookUpDTO.Id);
+                    return Ok(id);
                 else
                     return NotFound();
 
@@ -84,8 +96,9 @@ namespace LookUpApi.Controllers
 
         }
 
-        // DELETE api/<controller>/5
         [HttpDelete("{id}")]
+        [SwaggerResponse(HttpStatusCode.OK, Type = typeof(int))]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
         public async Task<ActionResult> DeleteLookUp(int id)
         {
             var success = await lookUpService.DeleteLookUp(id);

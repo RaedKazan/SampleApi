@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace LookUpService
 {
-    public class CascadingLookUpService : ICascadingLookUpService
+    public class CascadingLookUpsService : ICascadingLookUpsService
     {
         private readonly LookUpDbContext lookUpDbContext;
 
-        public CascadingLookUpService(LookUpDbContext lookUpDbContext)
+        public CascadingLookUpsService(LookUpDbContext lookUpDbContext)
         {
             this.lookUpDbContext = lookUpDbContext;
         }

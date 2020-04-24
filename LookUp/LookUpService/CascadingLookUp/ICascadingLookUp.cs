@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace LookUpService
 {
-    public interface ICascadingLookUpService
+    public interface ICascadingLookUpsService
     {
         Task<int> PostCascadingLookUp(CascadingLookUp cascadingLookUp);
 

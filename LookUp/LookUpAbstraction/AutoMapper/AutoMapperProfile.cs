@@ -25,14 +25,14 @@ namespace LookUpAbstraction.AutoMapper
         {
             //CREATE
             CreateMap<CreateLookUpDTO, LookUp>()
-                .ForMember(des => des.LookUpType, opt => opt.MapFrom(src => src.LookUpTypeId))
+                .ForMember(des => des.LookUpTypeId, opt => opt.MapFrom(src => src.LookUpTypeId))
                 .ForMember(des => des.NameEn, opt => opt.MapFrom(src => src.NameEn))
                 .ForMember(des => des.NameAr, opt => opt.MapFrom(src => src.NameAr));
 
             //UPDATE
             CreateMap<UpdateLookUpDTO, LookUp>()
                 .ForMember(des => des.Id, opt => opt.MapFrom(src => src.Id))
-                .ForMember(des => des.LookUpType, opt => opt.MapFrom(src => src.LookUpTypeId))
+                .ForMember(des => des.LookUpTypeId, opt => opt.MapFrom(src => src.LookUpTypeId))
                 .ForMember(des => des.NameEn, opt => opt.MapFrom(src => src.NameEn))
                 .ForMember(des => des.NameAr, opt => opt.MapFrom(src => src.NameAr));
 
