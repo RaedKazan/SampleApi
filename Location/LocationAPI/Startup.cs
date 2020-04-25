@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using LocationAbstraction.AutoMapper;
+using LocationAPI.Middleware;
 using LocationData.Data;
 using LocationService.Locations;
 using Microsoft.AspNetCore.Builder;
@@ -56,15 +57,18 @@ namespace LocationAPI
 
             app.UseSwagger();
 
+            app.UseMiddleware<RequestLoggingMiddleware>();
+
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint(url: "/swagger/V1/swagger.json", name: "Location API V1");
             });
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            // note this will stop the middleware to catch the errors
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
 
             app.UseHttpsRedirection();
 

@@ -28,7 +28,7 @@ namespace LocationAbstraction.AutoMapper
                 .ForMember(dest => dest.BuildingNumber, opt => opt.MapFrom(src => src.BuildingNumber))
                 .ForMember(dest => dest.FloorNumber, opt => opt.MapFrom(src => src.FloorNumber));
 
-            CreateMap<Location, CreateLocationDTO>();
+            CreateMap<Location, LocationDTO>();
 
             #endregion
 
