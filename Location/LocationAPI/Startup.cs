@@ -70,6 +70,8 @@ namespace LocationAPI
             //    app.UseDeveloperExceptionPage();
             //}
 
+
+            DockerMigration.Migrate(app);
             app.UseHttpsRedirection();
 
             app.UseRouting();

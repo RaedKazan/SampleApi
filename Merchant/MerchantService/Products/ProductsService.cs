@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MerchantService.Products
 {
-    class ProductsService : IProductsService
+    public class ProductsService : IProductsService
     {
         private readonly MerchantApiContext context;
 

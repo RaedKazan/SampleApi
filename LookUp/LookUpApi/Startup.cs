@@ -66,10 +66,12 @@ namespace LookUpApi
             });
             #endregion
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
+
+            DockerMigration.Migrate(app);
 
             app.UseHttpsRedirection();
 

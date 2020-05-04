@@ -10,7 +10,7 @@ using System.Text;
 
 namespace MerchantAbstraction.AutoMapper
 {
-    class AutoMapping : Profile
+    public class AutoMapping : Profile
     {
         public AutoMapping()
         {

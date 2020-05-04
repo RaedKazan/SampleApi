@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MerchantService.Images
 {
-    class ImagesService : IImagesService
+   public class ImagesService : IImagesService
     {
         private readonly MerchantApiContext context;
         public ImagesService(MerchantApiContext context)

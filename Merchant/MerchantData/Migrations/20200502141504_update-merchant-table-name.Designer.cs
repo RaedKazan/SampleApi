@@ -4,14 +4,16 @@ using MerchantData.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MerchantData.Migrations
 {
     [DbContext(typeof(MerchantApiContext))]
-    partial class MerchantApiContextModelSnapshot : ModelSnapshot
+    [Migration("20200502141504_update-merchant-table-name")]
+    partial class updatemerchanttablename
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
