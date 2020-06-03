@@ -8,6 +8,7 @@ using MerchantData.Data;
 using MerchantService.Images;
 using MerchantService.Merchants;
 using MerchantService.Products;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -35,11 +36,43 @@ namespace MerchantApi
             services.AddControllers();
 
             services.AddSwaggerGen(c =>
-
             {
                 c.SwaggerDoc(name: "V1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Merchant API", Version = "V1" });
             });
 
+            services.AddAuthentication(config => {
+                config.DefaultScheme = "Cookie";
+                config.DefaultChallengeScheme = "oidc";
+            })
+                .AddCookie("Cookie")
+                .AddOpenIdConnect("oidc", config => {
+                    config.Authority = Configuration.GetValue<string>("IdentityUrl");
+                    config.ClientId = Configuration.GetValue<string>("ClientId");
+                    config.ClientSecret = Configuration.GetValue<string>("ClientSecret");
+                    config.SaveTokens = true;
+                    config.ResponseType = "code";
+                    config.SignedOutCallbackPath = "/Home/Index";
+
+                     // configure cookie claim mapping
+                     config.ClaimActions.DeleteClaim("amr");
+                    config.ClaimActions.DeleteClaim("s_hash");
+                    config.ClaimActions.MapUniqueJsonKey("RawCoding.Grandma", "rc.garndma");
+
+                     // two trips to load claims in to the cookie
+                     // but the id token is smaller !
+                     config.GetClaimsFromUserInfoEndpoint = true;
+
+                     // configure scope
+                     config.Scope.Clear();
+                    config.Scope.Add("openid");
+                    config.Scope.Add("rc.scope");
+                    config.Scope.Add("ApiOne");
+                    config.Scope.Add("ApiTwo");
+                    config.Scope.Add("offline_access");
+
+                });
+
+            services.AddHttpClient();
 
             services.AddDbContext<MerchantApiContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("Default")));
@@ -72,9 +105,9 @@ namespace MerchantApi
 
             DockerMigration.Migrate(app);
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

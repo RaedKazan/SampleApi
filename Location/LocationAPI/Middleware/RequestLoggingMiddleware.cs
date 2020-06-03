@@ -32,8 +32,10 @@ namespace LocationAPI.Middleware
                 await HandleExceptionAsync(context, ex);
             }
         }
+
         private Task HandleExceptionAsync(HttpContext context, Exception ex)
         {
+            
             logger.LogError(
                    "Request {method} {url} => {statusCode} =>{ErrorMassage}",
                    context.Request?.Method,

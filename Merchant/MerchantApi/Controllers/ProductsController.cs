@@ -2,6 +2,7 @@
 using MerchantAbstraction.ViewModels.Products;
 using MerchantData.Models;
 using MerchantService.Products;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.Swagger.Annotations;
 using System.Net;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace MerchantApi.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase

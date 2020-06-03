@@ -2,6 +2,8 @@
 using LocationAbstraction.ViewModels.Locations;
 using LocationData.Models;
 using LocationService.Locations;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.Swagger.Annotations;
 using System.Net;
@@ -9,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace LocationAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class LocationsController : ControllerBase
@@ -27,6 +30,7 @@ namespace LocationAPI.Controllers
         [SwaggerResponse(HttpStatusCode.OK, Type = typeof(LocationDTO))]
         public async Task<ActionResult<LocationDTO>> GetLocation(int id)
         {
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
 
             var location = await locationsService.GetLocation(id);
 

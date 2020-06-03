@@ -2,13 +2,16 @@
 using MerchantAbstraction.ViewModels.Merchants;
 using MerchantData.Models;
 using MerchantService.Merchants;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.Swagger.Annotations;
 using System.Net;
 using System.Threading.Tasks;
 
+
 namespace MerchantApi.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class MerchantsController : ControllerBase

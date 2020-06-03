@@ -61,6 +61,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationTests", "Location\L
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LookUpAbstraction", "LookUp\LookUpAbstraction\LookUpAbstraction.csproj", "{839DABA8-073E-46A2-AE9A-F8FFD35150EB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserManagement", "UserManagement", "{05D9E45D-3DAE-404A-B142-656BDDBB2534}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer", "UserManagement\IdentityServer\IdentityServer.csproj", "{9F72464A-DF0D-4630-AD46-210838B74F19}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -155,6 +159,10 @@ Global
 		{839DABA8-073E-46A2-AE9A-F8FFD35150EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{839DABA8-073E-46A2-AE9A-F8FFD35150EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{839DABA8-073E-46A2-AE9A-F8FFD35150EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F72464A-DF0D-4630-AD46-210838B74F19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F72464A-DF0D-4630-AD46-210838B74F19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F72464A-DF0D-4630-AD46-210838B74F19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F72464A-DF0D-4630-AD46-210838B74F19}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -182,6 +190,7 @@ Global
 		{2892422F-3677-46EB-B3FA-B35CA3BFD030} = {7DCC9F56-5422-4AF5-AD04-7D408BF80057}
 		{B931ADAC-2264-41DC-A2B7-2B2DBD0F891A} = {6328A1E0-A3F4-4BD2-8926-E1B126CAD19F}
 		{839DABA8-073E-46A2-AE9A-F8FFD35150EB} = {6393BCDF-A714-4C46-A26B-20559C798D8F}
+		{9F72464A-DF0D-4630-AD46-210838B74F19} = {05D9E45D-3DAE-404A-B142-656BDDBB2534}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D34A2317-F69B-4BEA-B257-51A6FF448D8C}

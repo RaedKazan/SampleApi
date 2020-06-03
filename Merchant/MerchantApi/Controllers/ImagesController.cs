@@ -2,6 +2,7 @@
 using MerchantAbstraction.ViewModels.Images;
 using MerchantData.Models;
 using MerchantService.Images;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.Swagger.Annotations;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace MerchantApi.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ImagesController : ControllerBase
